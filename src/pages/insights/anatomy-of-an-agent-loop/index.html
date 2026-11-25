@@ -1,0 +1,90 @@
+---
+type: article
+path: insights/anatomy-of-an-agent-loop/
+title: The anatomy of an agent loop
+h1: The anatomy of an agent loop
+description: What an AI agent loop has to do, step by step: observe, decide, act and verify, with practical notes on state, tool contracts, budgets and failure modes.
+topic: Agent systems
+reading: 8 min
+order: 1
+---
+<div class="wrap">
+<header class="article-head">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="{{root}}">Home</a></li><li><a href="{{root}}insights/">Insights</a></li><li aria-current="page">Agent loop</li></ol></nav>
+<h1>The anatomy of an agent loop</h1>
+<p class="lede">An agent is a loop with a model in the middle. Most of what makes it dependable is not the model. It is the code around it.</p>
+<p class="label">Agent systems &middot; 8 min read &middot; SidEra Labs</p>
+</header>
+<div class="article-grid">
+<nav class="toc" aria-label="Contents" data-spy><h2>Contents</h2><ol>
+<li><a href="#what">What counts as an agent</a></li><li><a href="#jobs">The four jobs</a></li><li><a href="#state">State lives outside the model</a></li><li><a href="#tools">Tools are contracts</a></li><li><a href="#budgets">Budgets and stop conditions</a></li><li><a href="#verify">Verification</a></li><li><a href="#untrusted">Untrusted content</a></li><li><a href="#logs">What to log</a></li><li><a href="#refs">References</a></li></ol></nav>
+<div class="prose">
+<p class="note">General engineering guidance with cited sources. This essay does not report SidEra Labs experiments.</p>
+<h2 id="what" style="margin-top:0">What counts as an agent</h2>
+<p>The word &ldquo;agent&rdquo; gets used for everything from a chatbot with a calculator to a system that works unattended for hours. A useful distinction, drawn in Anthropic&rsquo;s engineering guidance on the topic, is between <em>workflows</em>, where models and tools are orchestrated through code paths written in advance, and <em>agents</em>, where the model directs its own process and decides which tools to use and when.</p>
+<p>That distinction has a practical consequence. If the steps of a task are known ahead of time, write them as a workflow. It will be cheaper, faster and easier to test. Reach for an agent when the path genuinely cannot be known in advance, and accept the cost in predictability.</p>
+<figure class="diagram"><img src="{{root}}assets/illustrations/agent-systems.svg" alt="Four numbered stages arranged in a loop around a central state block, with the fourth stage highlighted." width="320" height="240"><figcaption><b>Fig. 1</b>The loop has four jobs. Stage 4, verification, is easy to leave out.</figcaption></figure>
+
+<h2 id="jobs">The four jobs</h2>
+<p>One useful way to reason about an agent loop is to separate four jobs.</p>
+<ol>
+<li><strong>Observe.</strong> Assemble what the model will see: the task, relevant state, recent results.</li>
+<li><strong>Decide.</strong> Ask the model for the next step, which is either a tool call or a claim that the task is finished.</li>
+<li><strong>Act.</strong> Run the tool and capture the result, including errors.</li>
+<li><strong>Verify.</strong> Check the outcome with something that is not the model&rsquo;s own opinion.</li>
+</ol>
+<p>The ReAct paper by Yao and colleagues popularised interleaving reasoning with actions in this way. The sketch below is illustrative pseudocode in a Python-like style. It is not a tested implementation and is not meant to be run as written.</p>
+<pre tabindex="0" aria-label="Illustrative pseudocode"><code>def run(task, tools, budget):
+    state = State(task)
+    while not budget.exhausted():
+        view = state.observe()               # what the model is shown
+        step = model.decide(view, tools.specs)
+        if step.is_final():
+            failures = checks.run(state, step)   # independent of the model
+            if not failures:
+                return step.result
+            state.note(failures)             # feed failures back in
+            continue
+        result = tools.call(step)            # typed, time-limited, logged
+        state.record(step, result)           # durable, outside the model
+        budget.charge(step, result)
+    return escalate_to_human(state)</code></pre>
+<p>Notice what is not in the model&rsquo;s hands: the budget, the checks, the record and the decision to escalate. Those are ordinary code, and that is deliberate.</p>
+
+<h2 id="state">State lives outside the model</h2>
+<p>A model&rsquo;s context window is a working view, not a database. Anything that must survive, such as what has been done, what was decided and what is pending, belongs in a structure the program owns. The model is shown a selection of it each turn. This makes runs resumable, lets you inspect exactly what the model saw, and stops important facts from silently falling out of context in a long task.</p>
+
+<h2 id="tools">Tools are contracts</h2>
+<p>A tool is an interface between a probabilistic caller and deterministic code, so it deserves the care of any public API.</p>
+<ul>
+<li><strong>Typed inputs.</strong> Validate arguments before running anything. Reject, do not guess.</li>
+<li><strong>Error messages written for the caller.</strong> &ldquo;File not found: did you mean report.md?&rdquo; helps a model recover. A stack trace does not.</li>
+<li><strong>Idempotence where possible.</strong> If a step is retried, it should not do the damage twice.</li>
+<li><strong>Time limits and size limits.</strong> No tool should be able to hang the loop or flood the context.</li>
+<li><strong>Least privilege.</strong> Give each tool access to exactly what it needs. Prefer a read-only tool when reading is enough.</li>
+</ul>
+
+<h2 id="budgets">Budgets and stop conditions</h2>
+<p>A loop without limits is a bug waiting for an input to trigger it. Set explicit ceilings on steps, wall-clock time and cost, and decide in advance what happens when one is hit. Add a check for no progress: if the last several steps repeat an action or produce the same result, stop and escalate rather than burn the whole budget. A clean &ldquo;I could not finish, here is where I got to&rdquo; is a valid and valuable outcome.</p>
+
+<h2 id="verify">Verification the loop cannot talk past</h2>
+<p>A model that says &ldquo;done&rdquo; has only told you what it believes. Prefer checks that can fail independently of its reasoning: tests that run, a schema that validates, a diff that stays under an agreed size, a numeric result recomputed by separate code. When no automatic check exists, that is a signal to put a person at the decision point, not to trust the claim.</p>
+
+<h2 id="untrusted">Untrusted content</h2>
+<p>Tool results, web pages, documents and emails are data, but a model reads them in the same stream as its instructions. Text inside them can try to redirect it. This is prompt injection, listed as LLM01 in the OWASP Top 10 for LLM Applications, which also distinguishes direct attempts from indirect ones that arrive through content the system fetches.</p>
+<p>No single filter solves this. A more dependable approach is structural: limit what the system can do, require confirmation for consequential actions, keep untrusted content away from privileged tools where you can, and assume some injections will get through. These are general recommendations, not guarantees. OWASP&rsquo;s guidance itself says it is unclear whether foolproof prevention methods exist.</p>
+
+<h2 id="logs">What to log</h2>
+<p>Record, for every step, what the model was shown, what it chose, the tool call and its result, the budget used, and which checks ran. With that you can replay a failure, see why a decision was made, and measure the loop honestly. Without it, debugging an agent means guessing.</p>
+<div class="note"><p><strong>The short version.</strong> Keep state, budgets, checks and escalation in ordinary code. Let the model choose steps. Verify with something other than the model.</p></div>
+
+<h2 id="refs">References</h2>
+<ol class="refs">
+<li>Anthropic. <a class="ext" href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>. Engineering guidance on workflows versus agents.</li>
+<li>Yao, S. et al. (2022). <a class="ext" href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a>. arXiv:2210.03629.</li>
+<li>OWASP GenAI Security Project. <a class="ext" href="https://genai.owasp.org/llm2026/llm012026-prompt-injection/">LLM01:2026 Prompt Injection</a>, in the OWASP Top 10 for LLM Applications.</li>
+</ol>
+<div class="next-links"><a class="btn" href="{{root}}insights/what-a-result-needs/">Next: what a result needs <span class="arr" aria-hidden="true">&rarr;</span></a><a class="btn" href="{{root}}research/#agent-systems">The agent systems research area</a></div>
+</div>
+</div>
+</div>

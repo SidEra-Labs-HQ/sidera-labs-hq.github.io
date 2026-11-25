@@ -1,0 +1,13 @@
+[
+  {
+    "id": "website",
+    "category": "Digital Presence",
+    "status": "Live",
+    "name": "SidEra Labs Website",
+    "domain": "sidera-labs-hq.github.io",
+    "url": "https://sidera-labs-hq.github.io/",
+    "description": "The official public website of SidEra Labs, presenting its mission, areas of interest, projects and technical publications.",
+    "platform": "GitHub Pages",
+    "repo": "https://github.com/SidEra-Labs-HQ/sidera-labs-hq.github.io"
+  }
+]

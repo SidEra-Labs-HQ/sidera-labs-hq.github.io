@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What a result needs before you believe it | SidEra Labs</title>
+<meta name="description" content="A practical checklist for experimental discipline in applied AI and engineering: baselines, honest data splits, repeated runs, ablations, slices and a ladder of claims.">
+<link rel="canonical" href="https://sidera-labs-hq.github.io/insights/what-a-result-needs/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="preload" href="../../assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/ibm-plex-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/site.css">
+<meta property="og:site_name" content="SidEra Labs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What a result needs before you believe it | SidEra Labs">
+<meta property="og:description" content="A practical checklist for experimental discipline in applied AI and engineering: baselines, honest data splits, repeated runs, ablations, slices and a ladder of claims.">
+<meta property="og:url" content="https://sidera-labs-hq.github.io/insights/what-a-result-needs/">
+<meta property="og:image" content="https://sidera-labs-hq.github.io/assets/images/og-sidera-labs.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SidEra Labs mark beside the line: Engineering the Next Era of Intelligence.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What a result needs before you believe it | SidEra Labs">
+<meta name="twitter:description" content="A practical checklist for experimental discipline in applied AI and engineering: baselines, honest data splits, repeated runs, ablations, slices and a ladder of claims.">
+<meta name="twitter:image" content="https://sidera-labs-hq.github.io/assets/images/og-sidera-labs.png">
+<meta name="twitter:image:alt" content="SidEra Labs mark beside the line: Engineering the Next Era of Intelligence.">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://sidera-labs-hq.github.io/insights/what-a-result-needs/#article",
+   "headline": "What a result needs before you believe it",
+   "description": "A practical checklist for experimental discipline in applied AI and engineering: baselines, honest data splits, repeated runs, ablations, slices and a ladder of claims.",
+   "mainEntityOfPage": {
+    "@id": "https://sidera-labs-hq.github.io/insights/what-a-result-needs/#webpage"
+   },
+   "inLanguage": "en",
+   "author": {
+    "@id": "https://sidera-labs-hq.github.io/#organization"
+   },
+   "publisher": {
+    "@id": "https://sidera-labs-hq.github.io/#organization"
+   },
+   "image": "https://sidera-labs-hq.github.io/assets/images/og-sidera-labs.png",
+   "articleSection": "Research methodology"
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://sidera-labs-hq.github.io/insights/what-a-result-needs/#webpage",
+   "url": "https://sidera-labs-hq.github.io/insights/what-a-result-needs/",
+   "name": "What a result needs before you believe it",
+   "description": "A practical checklist for experimental discipline in applied AI and engineering: baselines, honest data splits, repeated runs, ablations, slices and a ladder of claims.",
+   "inLanguage": "en",
+   "isPartOf": {
+    "@id": "https://sidera-labs-hq.github.io/#website"
+   },
+   "publisher": {
+    "@id": "https://sidera-labs-hq.github.io/#organization"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://sidera-labs-hq.github.io/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Insights",
+     "item": "https://sidera-labs-hq.github.io/insights/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "What a result needs before you believe it",
+     "item": "https://sidera-labs-hq.github.io/insights/what-a-result-needs/"
+    }
+   ]
+  },
+  {
+   "@id": "https://sidera-labs-hq.github.io/#organization",
+   "@type": "Organization",
+   "name": "SidEra Labs",
+   "url": "https://sidera-labs-hq.github.io/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap bar">
+<a class="brand" href="../../" aria-label="SidEra Labs, home"><img src="../../assets/brand/sidera-mark-96.png" width="40" height="40" alt=""><span>SidEra <i>Labs</i></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="bars" aria-hidden="true"></span>Menu</button>
+<nav class="nav" id="site-nav" aria-label="Primary"><ul><li><a href="../../">Home</a></li><li><a href="../../about/">About</a></li><li><a href="../../research/">Research</a></li><li><a href="../../projects/">Projects</a></li><li><a href="../../insights/" aria-current=page>Insights</a></li><li><a href="../../contact/">Contact</a></li></ul></nav>
+</div>
+</header>
+<main id="main">
+<div class="wrap">
+<header class="article-head">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../insights/">Insights</a></li><li aria-current="page">What a result needs</li></ol></nav>
+<h1>What a result needs before you believe it</h1>
+<p class="lede">Many mistaken results are not dishonest. They are an unlucky run, a leaky split or a weak baseline that nobody checked. Here is a short discipline for catching them early.</p>
+<p class="label">Research methodology &middot; 9 min read &middot; SidEra Labs</p>
+</header>
+<div class="article-grid">
+<nav class="toc" aria-label="Contents" data-spy><h2>Contents</h2><ol>
+<li><a href="#question">Write the question first</a></li><li><a href="#baseline">Pick a baseline that can embarrass you</a></li><li><a href="#splits">Keep the data honest</a></li><li><a href="#repeat">Run it more than once</a></li><li><a href="#ablate">Ablate</a></li><li><a href="#slices">Look at slices</a></li><li><a href="#record">Record everything</a></li><li><a href="#ladder">A ladder of claims</a></li><li><a href="#negative">Publish the negative result</a></li><li><a href="#refs">References</a></li></ol></nav>
+<div class="prose">
+<p class="note">General engineering guidance with cited sources. This essay does not report SidEra Labs experiments.</p>
+<h2 id="question" style="margin-top:0">Write the question first</h2>
+<p>Before running anything, write down three lines: the question, the metric that will answer it, and what result would change your mind. This is not bureaucracy. It stops the common drift where the metric is chosen after the numbers are in because it happens to look good.</p>
+<figure class="diagram"><img src="../../assets/illustrations/applied-experimental.svg" alt="A scatter plot with error bars, a fitted trend with a shaded band, and a dashed baseline line." width="320" height="240"><figcaption><b>Fig. 1</b>A result means little without its spread and a baseline to compare with.</figcaption></figure>
+
+<h2 id="baseline">Pick a baseline that can embarrass you</h2>
+<p>A new method scoring 90 means little if a trivial rule scores 89. Always include the simplest thing that could work: predicting the most common class, a linear model, the previous best system, a keyword search. Give the baseline the same tuning effort as the new method. If your clever approach cannot clearly beat a well-tuned simple one, that is the finding.</p>
+
+<h2 id="splits">Keep the data honest</h2>
+<p>Use a held-out test set that is touched once, at the end. Tune on a separate validation set. Then hunt for leakage: duplicates across splits, features that encode the answer, time-ordered data split at random so that the future informs the past. When data has groups, such as the same user, device or document, split by group.</p>
+
+<h2 id="repeat">Run it more than once</h2>
+<p>Many training procedures are random. A single run can land high or low by chance. Henderson and colleagues examined this in deep reinforcement learning and showed that results can vary substantially with random seeds and with implementation details, which makes single-run comparisons unreliable. The remedy is plain: repeat with several seeds, report the spread, and compare distributions rather than best runs. A difference smaller than the run-to-run spread is weak evidence of an improvement, and no single metric shows that a whole system works.</p>
+<p>Report something like <code>mean &plusmn; standard deviation over N seeds</code> and say what N is. Selecting the best of many runs and reporting it as typical is a quiet way to mislead yourself.</p>
+
+<h2 id="ablate">Ablate</h2>
+<p>If a system has five new ideas and improves, you do not know which one helped. Remove them one at a time, or add them one at a time to the baseline. Ablations often show that one idea does nearly all the work, or that one actively hurts. Both are useful to know, and both shrink the thing you have to maintain.</p>
+
+<h2 id="slices">Look at slices, not only the average</h2>
+<p>An average hides who is being failed. Break results down by the conditions that matter: input length, category, source, language, lighting, sensor type. Mitchell and colleagues proposed model cards partly for this reason, to document how a model performs across different conditions and where it should not be used. A system that is 95 percent accurate overall and 60 percent accurate on one important group is a 60 percent system for that group.</p>
+
+<h2 id="record">Record everything</h2>
+<p>Every run should leave enough behind to be repeated: the code version, the configuration, the data version or identifier, the random seeds, the environment and the raw outputs. If rerunning means asking someone to remember what they did, it will not be rerun.</p>
+
+<h2 id="ladder">A ladder of claims</h2>
+<p>Not every result supports every sentence. Matching the claim to the evidence avoids most overstatement.</p>
+<div class="table-scroll"><table class="kv"><tbody>
+<tr><th scope="row">Observed</th><td>It happened once, here. Say &ldquo;we saw&rdquo;.</td></tr>
+<tr><th scope="row">Repeated</th><td>It held across seeds or reruns, with the spread reported.</td></tr>
+<tr><th scope="row">Explained</th><td>Ablations or analysis point to a mechanism, and a prediction from it was tested.</td></tr>
+<tr><th scope="row">General</th><td>It held on other data, settings or by an independent party.</td></tr>
+</tbody></table></div>
+
+<h2 id="negative">Publish the negative result</h2>
+<p>An idea that did not work, with a clear record of how it was tested, saves other people time and keeps the whole field calibrated. It also protects you from repeating it. Write limitations as specifically as results: what was not tried, what could not be measured, and where the conclusion may not hold.</p>
+<div class="note"><p><strong>The short version.</strong> Decide the metric first. Beat a strong simple baseline. Repeat the run and report the spread. Remove parts to see what matters. Break results down by condition. Claim only what the evidence supports.</p></div>
+
+<h2 id="refs">References</h2>
+<ol class="refs">
+<li>Henderson, P. et al. (2018). <a class="ext" href="https://arxiv.org/abs/1709.06560">Deep Reinforcement Learning that Matters</a>. arXiv:1709.06560.</li>
+<li>Mitchell, M. et al. (2019). <a class="ext" href="https://arxiv.org/abs/1810.03993">Model Cards for Model Reporting</a>. arXiv:1810.03993.</li>
+</ol>
+<div class="next-links"><a class="btn" href="../../insights/where-software-meets-hardware/">Next: where software meets hardware <span class="arr" aria-hidden="true">&rarr;</span></a><a class="btn" href="../../research/#applied-experimental">The applied research area</a></div>
+</div>
+</div>
+</div>
+
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="foot">
+<div>
+<a class="brand" href="../../" aria-label="SidEra Labs, home"><img src="../../assets/brand/sidera-mark-96.png" width="40" height="40" alt=""><span>SidEra <i>Labs</i></span></a>
+<p style="margin-top:1rem">An independent engineering and research initiative exploring intelligent systems, software, agents, advanced computing and robotics.</p>
+<p class="label" style="margin:0">Engineering the Next Era of Intelligence.</p>
+</div>
+<nav aria-label="Footer"><h2>Pages</h2><ul><li><a href="../../">Home</a></li><li><a href="../../about/">About</a></li><li><a href="../../research/">Research</a></li><li><a href="../../projects/">Projects</a></li><li><a href="../../insights/">Insights</a></li><li><a href="../../contact/">Contact</a></li></ul></nav>
+<div><h2>Elsewhere</h2><ul>
+<li><a class="ext" href="https://github.com/SidEra-Labs-HQ">GitHub organization</a></li>
+<li><a href="../../contact/">How to reach us</a></li>
+<li><a href="../../about/#site-notes">Accessibility and site notes</a></li>
+<li><a href="../../sitemap.xml">Sitemap</a></li>
+</ul></div>
+</div>
+<div class="legal"><p>&copy; 2026 SidEra Labs</p></div>
+</div>
+</footer>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+# Builds the static site and checks it on every pull request and push.
+# Deploys to GitHub Pages only on pushes to main and manual runs (workflow_dispatch).
+# In the repository: Settings > Pages > Build and deployment > Source = "GitHub Actions".
+name: Build and deploy site to GitHub Pages
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'deploy' }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build pages from src/
+        run: python3 tools/build.py
+      - name: Check links, metadata, sitemap
+        run: python3 tools/check_site.py
+      - name: Regression test for the checker's directory exclusion
+        run: python3 tools/test_check_site.py
+      - name: Fail if generated files differ from the committed ones
+        run: git diff --exit-code
+      - name: Stage and verify public files only
+        run: bash tools/stage_site.sh
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,5 @@
+# SidEra Labs: all public pages may be crawled.
+User-agent: *
+Allow: /
+
+Sitemap: https://sidera-labs-hq.github.io/sitemap.xml

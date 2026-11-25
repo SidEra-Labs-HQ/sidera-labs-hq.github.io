@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where software meets hardware | SidEra Labs</title>
+<meta name="description" content="Units, coordinate frames, timing, safe states and replayable logs: a practical checklist for the interface between software and physical systems.">
+<link rel="canonical" href="https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="preload" href="../../assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/ibm-plex-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/site.css">
+<meta property="og:site_name" content="SidEra Labs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Where software meets hardware | SidEra Labs">
+<meta property="og:description" content="Units, coordinate frames, timing, safe states and replayable logs: a practical checklist for the interface between software and physical systems.">
+<meta property="og:url" content="https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/">
+<meta property="og:image" content="https://sidera-labs-hq.github.io/assets/images/og-sidera-labs.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SidEra Labs mark beside the line: Engineering the Next Era of Intelligence.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Where software meets hardware | SidEra Labs">
+<meta name="twitter:description" content="Units, coordinate frames, timing, safe states and replayable logs: a practical checklist for the interface between software and physical systems.">
+<meta name="twitter:image" content="https://sidera-labs-hq.github.io/assets/images/og-sidera-labs.png">
+<meta name="twitter:image:alt" content="SidEra Labs mark beside the line: Engineering the Next Era of Intelligence.">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/#article",
+   "headline": "Where software meets hardware: writing interface contracts",
+   "description": "Units, coordinate frames, timing, safe states and replayable logs: a practical checklist for the interface between software and physical systems.",
+   "mainEntityOfPage": {
+    "@id": "https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/#webpage"
+   },
+   "inLanguage": "en",
+   "author": {
+    "@id": "https://sidera-labs-hq.github.io/#organization"
+   },
+   "publisher": {
+    "@id": "https://sidera-labs-hq.github.io/#organization"
+   },
+   "image": "https://sidera-labs-hq.github.io/assets/images/og-sidera-labs.png",
+   "articleSection": "Hardware-software integration"
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/#webpage",
+   "url": "https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/",
+   "name": "Where software meets hardware",
+   "description": "Units, coordinate frames, timing, safe states and replayable logs: a practical checklist for the interface between software and physical systems.",
+   "inLanguage": "en",
+   "isPartOf": {
+    "@id": "https://sidera-labs-hq.github.io/#website"
+   },
+   "publisher": {
+    "@id": "https://sidera-labs-hq.github.io/#organization"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://sidera-labs-hq.github.io/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Insights",
+     "item": "https://sidera-labs-hq.github.io/insights/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Where software meets hardware: writing interface contracts",
+     "item": "https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/"
+    }
+   ]
+  },
+  {
+   "@id": "https://sidera-labs-hq.github.io/#organization",
+   "@type": "Organization",
+   "name": "SidEra Labs",
+   "url": "https://sidera-labs-hq.github.io/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap bar">
+<a class="brand" href="../../" aria-label="SidEra Labs, home"><img src="../../assets/brand/sidera-mark-96.png" width="40" height="40" alt=""><span>SidEra <i>Labs</i></span></a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="bars" aria-hidden="true"></span>Menu</button>
+<nav class="nav" id="site-nav" aria-label="Primary"><ul><li><a href="../../">Home</a></li><li><a href="../../about/">About</a></li><li><a href="../../research/">Research</a></li><li><a href="../../projects/">Projects</a></li><li><a href="../../insights/" aria-current=page>Insights</a></li><li><a href="../../contact/">Contact</a></li></ul></nav>
+</div>
+</header>
+<main id="main">
+<div class="wrap">
+<header class="article-head">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../insights/">Insights</a></li><li aria-current="page">Software meets hardware</li></ol></nav>
+<h1>Where software meets hardware: writing interface contracts</h1>
+<p class="lede">Physical systems fail at the seams: between teams, between units, between clocks. Most of those seams can be written down before anything is powered on.</p>
+<p class="label">Hardware-software integration &middot; 8 min read &middot; SidEra Labs</p>
+</header>
+<div class="article-grid">
+<nav class="toc" aria-label="Contents" data-spy><h2>Contents</h2><ol>
+<li><a href="#units">Units and frames</a></li><li><a href="#timing">Timing</a></li><li><a href="#safe">Safe states</a></li><li><a href="#sim">Simulation and reality</a></li><li><a href="#replay">Log to replay</a></li><li><a href="#ladder">A test ladder</a></li><li><a href="#refs">References</a></li></ol></nav>
+<div class="prose">
+<p class="note">General engineering guidance with cited sources. This essay does not report SidEra Labs experiments.</p>
+<h2 id="units" style="margin-top:0">Units and frames</h2>
+<p>A well-known unit failure in engineering is the loss of NASA&rsquo;s Mars Climate Orbiter in 1999. The Mishap Investigation Board&rsquo;s Phase I report describes an interface specification that required thruster impulse data in newton-seconds. The ground software supplied it in pound-force seconds, and the verification process did not catch the mismatch. The report also identifies contributing causes beyond the unit error, so the lesson is wider than one conversion: the interface was not verified end to end.</p>
+<p>The habit to take from it is cheap. In every interface that carries a physical quantity, state the following in the field name or the type, not only in a document:</p>
+<ul>
+<li><strong>Unit</strong>, for example <code>speed_m_per_s</code> instead of <code>speed</code>.</li>
+<li><strong>Frame and sign convention</strong>, for example &ldquo;x forward, y left, z up, right-handed&rdquo;.</li>
+<li><strong>Valid range</strong>, and what happens outside it.</li>
+<li><strong>Update rate</strong> and what &ldquo;no update&rdquo; means.</li>
+</ul>
+<p>Robotics middleware shows the pattern in practice. In ROS 2, for instance, standard messages carry a header with a timestamp and a coordinate frame identifier, so receivers know when and in what frame a measurement was made. The <a class="ext" href="https://github.com/ros2/common_interfaces/blob/rolling/std_msgs/msg/Header.msg"><code>std_msgs/msg/Header</code> definition</a> contains a <code>stamp</code> field, a time, and a <code>frame_id</code> field, the coordinate frame the data is associated with. The architecture is described by Macenski and colleagues in <em>Science Robotics</em>.</p>
+<figure class="diagram"><img src="../../assets/illustrations/robotics-hardware.svg" alt="A two-link robot arm with a joint angle arc, a dashed reach envelope and a target marker." width="320" height="240"><figcaption><b>Fig. 1</b>Even a two-link arm needs agreed frames, angle conventions and limits before software and hardware can meet.</figcaption></figure>
+
+<h2 id="timing">Timing</h2>
+<p>Software treats time as a detail. Control treats it as part of the signal. Three practices cover most of it.</p>
+<ol>
+<li><strong>Timestamp at the source.</strong> Stamp a measurement when it was taken, not when it arrived. Arrival time includes queues and jitter you did not intend to measure.</li>
+<li><strong>Write a latency budget.</strong> Add up each stage from sensor to actuator and compare it with what the control loop can tolerate. As an illustration only: if a loop runs at 100 Hz it has a 10 ms period, so a camera pipeline that adds 60 ms of delay means every decision acts on a world that is already several cycles old.</li>
+<li><strong>Measure jitter, not just average latency.</strong> A loop that is usually on time and occasionally 50 ms late behaves very differently from one that is always 20 ms late.</li>
+</ol>
+
+<h2 id="safe">Safe states</h2>
+<p>Define, in advance, what the device does when something goes wrong: a sensor stops reporting, a message is late, software crashes, power dips. For a motor that may mean cutting torque. For a heater it may mean turning off. Then test that path on purpose. Common supports are a hardware watchdog that resets or disables outputs if software stops checking in, hard limits enforced below the software layer, and an emergency stop that does not depend on the code being healthy.</p>
+
+<h2 id="sim">Simulation and reality</h2>
+<p>Simulation is the fastest way to find logic errors, and it is a poor judge of friction, noise, backlash and thermal behaviour. Use it for what it is good at, then close the gap in stages: replay recorded real data through the software, then run with the real controller and a simulated plant, then the real device with conservative limits, and only then relax the limits. Keep the same interfaces at every stage so that nothing changes but the thing under test.</p>
+
+<h2 id="replay">Log to replay</h2>
+<p>Physical failures are hard to reproduce. Record raw sensor streams with timestamps, commands sent, internal state and software and configuration versions. With that, a failure can be fed back through the software on a desk. Without it, the only test is waiting for the problem to happen again.</p>
+
+<h2 id="ladder">A test ladder</h2>
+<div class="table-scroll"><table class="kv"><tbody>
+<tr><th scope="row">Unit tests</th><td>Pure logic, conversions and state machines. Fast and run constantly.</td></tr>
+<tr><th scope="row">Replay tests</th><td>Recorded real data run through the software. Catches regressions on real signals.</td></tr>
+<tr><th scope="row">Hardware in the loop</th><td>Real controller, simulated plant. Tests timing and I/O without risk.</td></tr>
+<tr><th scope="row">Bench tests</th><td>Real device, conservative limits, a person at the stop button.</td></tr>
+</tbody></table></div>
+<div class="note"><p><strong>The short version.</strong> Put units and frames in the names. Timestamp at the source and budget your latency. Decide the safe state and test it. Log enough to replay.</p></div>
+
+<h2 id="refs">References</h2>
+<ol class="refs">
+<li>NASA Mars Climate Orbiter Mishap Investigation Board (1999). <a class="ext" href="https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf">Phase I Report</a>, 10 November 1999.</li>
+<li>ROS 2 <code>common_interfaces</code>. <a class="ext" href="https://github.com/ros2/common_interfaces/blob/rolling/std_msgs/msg/Header.msg">std_msgs/msg/Header.msg</a> (rolling branch).</li>
+<li>Macenski, S., Foote, T., Gerkey, B., Lalancette, C., Woodall, W. (2022). Robot Operating System 2: Design, architecture, and uses in the wild. <em>Science Robotics</em>, doi:10.1126/scirobotics.abm6074. Preprint: <a class="ext" href="https://arxiv.org/abs/2211.07752">arXiv:2211.07752</a>.</li>
+</ol>
+<div class="next-links"><a class="btn" href="../../insights/anatomy-of-an-agent-loop/">Read: the anatomy of an agent loop <span class="arr" aria-hidden="true">&rarr;</span></a><a class="btn" href="../../research/#robotics-hardware">The robotics research area</a></div>
+</div>
+</div>
+</div>
+
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="foot">
+<div>
+<a class="brand" href="../../" aria-label="SidEra Labs, home"><img src="../../assets/brand/sidera-mark-96.png" width="40" height="40" alt=""><span>SidEra <i>Labs</i></span></a>
+<p style="margin-top:1rem">An independent engineering and research initiative exploring intelligent systems, software, agents, advanced computing and robotics.</p>
+<p class="label" style="margin:0">Engineering the Next Era of Intelligence.</p>
+</div>
+<nav aria-label="Footer"><h2>Pages</h2><ul><li><a href="../../">Home</a></li><li><a href="../../about/">About</a></li><li><a href="../../research/">Research</a></li><li><a href="../../projects/">Projects</a></li><li><a href="../../insights/">Insights</a></li><li><a href="../../contact/">Contact</a></li></ul></nav>
+<div><h2>Elsewhere</h2><ul>
+<li><a class="ext" href="https://github.com/SidEra-Labs-HQ">GitHub organization</a></li>
+<li><a href="../../contact/">How to reach us</a></li>
+<li><a href="../../about/#site-notes">Accessibility and site notes</a></li>
+<li><a href="../../sitemap.xml">Sitemap</a></li>
+</ul></div>
+</div>
+<div class="legal"><p>&copy; 2026 SidEra Labs</p></div>
+</div>
+</footer>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# SidEra Labs
+
+> Engineering the Next Era of Intelligence. SidEra Labs is an independent engineering and research initiative. This file is an experimental, optional summary for tools that read it; it is not a ranking signal and the HTML pages are the source of truth.
+
+## Pages
+- [SidEra Labs: Engineering the Next Era of Intelligence](https://sidera-labs-hq.github.io/): SidEra Labs is an independent engineering and research initiative exploring AI, software engineering, agent systems, advanced computing and robotics.
+- [About](https://sidera-labs-hq.github.io/about/): Who SidEra Labs is, what it believes about engineering and research, how it works, and the limits of what this website claims.
+- [Contact](https://sidera-labs-hq.github.io/contact/): How to reach SidEra Labs. The public GitHub organization is the one verified contact route; no email address or form is published.
+- [Insights](https://sidera-labs-hq.github.io/insights/): Engineering essays from SidEra Labs on agent loops, experimental discipline and hardware-software interfaces, written with cited sources.
+- [Projects](https://sidera-labs-hq.github.io/projects/): Verified public SidEra Labs projects and the standard a project must meet to be listed, including status labels and required evidence.
+- [Research Areas](https://sidera-labs-hq.github.io/research/): Six areas SidEra Labs is exploring: intelligent systems, software infrastructure, agent systems, advanced computing, robotics and applied experimental research.
+- [The anatomy of an agent loop](https://sidera-labs-hq.github.io/insights/anatomy-of-an-agent-loop/): What an AI agent loop has to do, step by step: observe, decide, act and verify, with practical notes on state, tool contracts, budgets and failure modes.
+- [What a result needs before you believe it](https://sidera-labs-hq.github.io/insights/what-a-result-needs/): A practical checklist for experimental discipline in applied AI and engineering: baselines, honest data splits, repeated runs, ablations, slices and a ladder of claims.
+- [Where software meets hardware: writing interface contracts](https://sidera-labs-hq.github.io/insights/where-software-meets-hardware/): Units, coordinate frames, timing, safe states and replayable logs: a practical checklist for the interface between software and physical systems.
+
+## Elsewhere
+- [GitHub organization](https://github.com/SidEra-Labs-HQ)
