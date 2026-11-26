@@ -167,6 +167,8 @@ def layout(meta, body, root, url, nav_key, crumbs, noindex=False):
         f'<li><a href="{root}{p}"{" aria-current=page" if p == nav_key else ""}>{n}</a></li>' for n, p in NAV)
     robots = 'noindex, follow' if noindex else 'index, follow, max-image-preview:large, max-snippet:-1'
     og_type = 'article' if meta.get('type') == 'article' else 'website'
+    gsv = ('<meta name="google-site-verification" content="L3Aql-cjZYm9kjBsfjBm2AND7cjTwUi-mxOZi4SjH-U" />\n'
+           if meta.get('type') == 'home' else '')
     ld = '' if noindex else f'<script type="application/ld+json">\n{jsonld(meta, url, crumbs)}\n</script>'
     ogurl = '' if noindex else f'<meta property="og:url" content="{url}">'
     canon = '' if noindex else f'<link rel="canonical" href="{url}">'
@@ -187,8 +189,7 @@ def layout(meta, body, root, url, nav_key, crumbs, noindex=False):
 <link rel="manifest" href="{root}manifest.webmanifest">
 <link rel="preload" href="{root}assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{root}assets/fonts/ibm-plex-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{root}css/site.css">
-<meta property="og:site_name" content="{SITE}">
+<link rel="stylesheet" href="{root}css/site.css">{gsv}<meta property="og:site_name" content="{SITE}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{esc(full_title)}">
 <meta property="og:description" content="{esc(meta['description'])}">
